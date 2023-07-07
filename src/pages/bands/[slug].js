@@ -6,6 +6,7 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Band({ band }) {
+  console.log("test");
   if (band === undefined || band.length === 0) {
     return (
       <main
