@@ -139,8 +139,21 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
+  const client = createClient({
+    space: process.env.CONTENTFUL_SPACE_ID,
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  });
+
+  const data = await client.getEntries({
+    content_type: "teamMember",
+  });
+
+  const paths = data.items.map((item) => ({
+    params: { slug: item.fields.slug },
+  }));
+
   return {
-    paths: [],
+    paths,
     fallback: false,
   };
 }
