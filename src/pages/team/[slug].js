@@ -6,6 +6,7 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function TeamMember({ teamMember }) {
+  console.log("team"3);
   if (teamMember === undefined || teamMember.length === 0) {
     return (
       <main
