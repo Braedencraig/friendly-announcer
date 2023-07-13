@@ -6,11 +6,10 @@ import Image from "next/image";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function TeamMember({ teamMember }) {
-  console.log("team"3);
   if (teamMember === undefined || teamMember.length === 0) {
     return (
       <main
-        className={`flex min-h-screen flex-col items-center justify-between p-12 ${inter.className}`}
+        className={`flex  flex-col items-center justify-between p-12 ${inter.className}`}
       >
         <div className="w-full max-w-[1600px] mb-16 flex justify-between items-center">
           <Link href="/">
@@ -30,7 +29,7 @@ export default function TeamMember({ teamMember }) {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-12 ${inter.className}`}
+      className={`flex  flex-col items-center justify-between p-12 ${inter.className}`}
     >
       <div className="w-full max-w-[1600px] mb-16 flex justify-between items-center">
         <Link href="/">
@@ -53,50 +52,6 @@ export default function TeamMember({ teamMember }) {
             return (
               <Link key={i} href={`/bands/${slug}`}>
                 <div className="relative lg:max-h-[300px] lg:h-[300px] w-[100%] max-w-[100%] h-[400px] lg:mb-0 mb-16 border-white-500 border-2 rounded-xl">
-                  <h2 className="absolute left-0 right-0 text-center top-8 lg:top-4 text-4xl lg:text-2xl uppercase z-40 font-black font-mono">
-                    {title}
-                  </h2>
-                  {image?.fields.file.url && (
-                    <Image
-                      className="opacity-75 hover:opacity-50 transition duration-300 relative rounded-xl"
-                      src={"https:" + image?.fields.file.url}
-                      alt="band"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  )}
-                </div>
-              </Link>
-            );
-          }
-        )}
-        {teamMember[0].fields.bands.map(
-          ({ fields: { title, slug, folders, image } }, i) => {
-            return (
-              <Link key={i} href={`/bands/${slug}`}>
-                <div className="relative  lg:max-h-[300px]  lg:h-[300px] w-[100%] max-w-[100%] h-[400px] lg:mb-0 mb-16 border-white-500 border-2 rounded-xl">
-                  <h2 className="absolute left-0 right-0 text-center top-8 lg:top-4 text-4xl lg:text-2xl uppercase z-40 font-black font-mono">
-                    {title}
-                  </h2>
-                  {image?.fields.file.url && (
-                    <Image
-                      className="opacity-75 hover:opacity-50 transition duration-300 relative rounded-xl"
-                      src={"https:" + image?.fields.file.url}
-                      alt="band"
-                      layout="fill"
-                      objectFit="cover"
-                    />
-                  )}
-                </div>
-              </Link>
-            );
-          }
-        )}
-        {teamMember[0].fields.bands.map(
-          ({ fields: { title, slug, folders, image } }, i) => {
-            return (
-              <Link key={i} href={`/bands/${slug}`}>
-                <div className="relative  lg:max-h-[300px]  lg:h-[300px] w-[100%] max-w-[100%] h-[400px] lg:mb-0 mb-16 border-white-500 border-2 rounded-xl">
                   <h2 className="absolute left-0 right-0 text-center top-8 lg:top-4 text-4xl lg:text-2xl uppercase z-40 font-black font-mono">
                     {title}
                   </h2>
