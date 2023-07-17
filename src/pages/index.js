@@ -8,7 +8,7 @@ import LoginForm from "@/components/LoginForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home({ teamMembers, bands }) {
+export default function Home({ teamMembers, bands, onePassword }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
@@ -133,16 +133,26 @@ export default function Home({ teamMembers, bands }) {
         {!isModalOpen && (
           <>
             <div className="w-full max-w-[1600px] mb-16 flex lg:flex-row flex-col justify-between items-center">
-              <Link href="/">
-                <Image
-                  src="/fa.jpg"
-                  alt="Friendly Announcer"
-                  className="dark:invert"
-                  width={100}
-                  height={24}
-                  priority
-                />
-              </Link>
+              <div className="flex items-center md:flex-row flex-col">
+                <Link href="/">
+                  <Image
+                    src="/fa.jpg"
+                    alt="Friendly Announcer"
+                    className="dark:invert"
+                    width={100}
+                    height={24}
+                    priority
+                  />
+                </Link>
+                <a
+                  className="md:ml-8 mt-8 md:mt-0 font-mono"
+                  href={onePassword[0].fields.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  1Password
+                </a>
+              </div>
               <div className="font-mono w-full flex justify-start sm:justify-end gap-8 flex-wrap max-w-[900px] lg:mt-0 mt-12">
                 {teamMembers.map(({ fields: { title, slug } }, i) => {
                   return (
@@ -199,6 +209,9 @@ export async function getStaticProps() {
       ),
       bands: data.items.filter(
         (item) => item.sys.contentType.sys.id === "band"
+      ),
+      onePassword: data.items.filter(
+        (item) => item.sys.contentType.sys.id === "onePassword"
       ),
     },
     revalidate: 1,
