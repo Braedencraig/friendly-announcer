@@ -72,6 +72,7 @@ export default function Home({ teamMembers, bands }) {
               position: fixed;
               bottom: 20px;
               right: 20px;
+              z-index: 1000;
             }
 
             .open-button {
@@ -81,6 +82,7 @@ export default function Home({ teamMembers, bands }) {
               border: none;
               border-radius: 4px;
               cursor: pointer;
+              font-size: 16px;
             }
 
             .modal {
@@ -104,7 +106,7 @@ export default function Home({ teamMembers, bands }) {
               background-color: transparent;
               color: #fff;
               border: none;
-              font-size: 20px;
+              font-size: 16px;
               cursor: pointer;
               padding: 10px 20px;
               background-color: #7289da;
@@ -112,6 +114,19 @@ export default function Home({ teamMembers, bands }) {
               border: none;
               border-radius: 4px;
               cursor: pointer;
+              margin-bottom: 16px;
+            }
+
+            @media screen and (max-width: 768px) {
+              .discord-widget {
+                bottom: 10px;
+                right: 10px;
+              }
+
+              .close-button {
+                top: 10px;
+                right: 10px;
+              }
             }
           `}</style>
         </div>
