@@ -61,8 +61,8 @@ export default function Home({ teamMembers, bands, onePassword }) {
               </button>
               <WidgetBot
                 style={{ height: "80vh", width: "80vw" }}
-                server="1128884322988986378"
-                channel="1128884323483910246"
+                server={process.env.NEXT_PUBLIC_SERVER}
+                channel={process.env.NEXT_PUBLIC_CHANNEL}
               />
             </div>
           )}
@@ -154,15 +154,17 @@ export default function Home({ teamMembers, bands, onePassword }) {
                 </a>
               </div>
               <div className="font-mono w-full flex justify-start sm:justify-end gap-8 flex-wrap max-w-[900px] lg:mt-0 mt-12">
-                {teamMembers.map(({ fields: { title, slug } }, i) => {
-                  return (
-                    <Link key={i} href={`/team/${slug}`}>
-                      <span className="text-xl uppercase hover:opacity-50 transition duration-300">
-                        {title}
-                      </span>
-                    </Link>
-                  );
-                })}
+                {teamMembers[0].fields.teamMember.map(
+                  ({ fields: { title, slug } }, i) => {
+                    return (
+                      <Link key={i} href={`/team/${slug}`}>
+                        <span className="text-xl uppercase hover:opacity-50 transition duration-300">
+                          {title}
+                        </span>
+                      </Link>
+                    );
+                  }
+                )}
               </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8 xl:gap-16 max-w-[1600px] w-full">
@@ -205,7 +207,7 @@ export async function getStaticProps() {
   return {
     props: {
       teamMembers: data.items.filter(
-        (item) => item.sys.contentType.sys.id === "teamMember"
+        (item) => item.sys.contentType.sys.id === "teamMembers"
       ),
       bands: data.items.filter(
         (item) => item.sys.contentType.sys.id === "band"
