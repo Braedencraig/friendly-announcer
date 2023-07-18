@@ -7,7 +7,7 @@ import LoginForm from "@/components/LoginForm";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function TeamMember({ teamMember }) {
+export default function TeamMember({ teamMember, onePassword }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
@@ -59,16 +59,26 @@ export default function TeamMember({ teamMember }) {
         className={`flex  flex-col items-center justify-between p-12 ${inter.className}`}
       >
         <div className="w-full max-w-[1600px] mb-16 flex justify-between items-center">
-          <Link href="/">
-            <Image
-              src="/fa.jpg"
-              alt="Friendly Announcer"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </Link>
+          <div className="flex items-center md:flex-row flex-col">
+            <Link href="/">
+              <Image
+                src="/fa.jpg"
+                alt="Friendly Announcer"
+                className="dark:invert"
+                width={100}
+                height={24}
+                priority
+              />
+            </Link>
+            <a
+              className="md:ml-8 mt-8 md:mt-0 font-mono"
+              href={onePassword[0].fields.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              1Password
+            </a>
+          </div>
           <div className="font-mono uppercase text-2xl">
             {teamMember[0].fields.title}
           </div>
@@ -117,6 +127,9 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       teamMember,
+      onePassword: data.items.filter(
+        (item) => item.sys.contentType.sys.id === "onePassword"
+      ),
     },
     revalidate: 1,
   };
