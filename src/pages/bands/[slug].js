@@ -27,7 +27,7 @@ export default function Band({ band, onePassword }) {
   if (!isAuthenticated) {
     return (
       <main
-        className={`flex h-full flex-col items-center justify-between p-12 ${inter.className} relative`}
+        className={`flex h-full  flex-col items-center justify-between p-12 ${inter.className} relative`}
       >
         <LoginForm setIsAuthenticated={setIsAuthenticated} />
       </main>
