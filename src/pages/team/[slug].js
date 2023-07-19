@@ -132,7 +132,7 @@ export async function getStaticProps({ params, preview = false }) {
         (item) => item.sys.contentType.sys.id === "onePassword"
       ),
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
 
@@ -152,6 +152,6 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 }

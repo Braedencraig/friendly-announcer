@@ -216,6 +216,6 @@ export async function getStaticProps() {
         (item) => item.sys.contentType.sys.id === "onePassword"
       ),
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 }
