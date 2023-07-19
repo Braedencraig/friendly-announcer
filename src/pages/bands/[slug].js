@@ -84,7 +84,7 @@ export default function Band({ band, onePassword }) {
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8 xl:gap-16 max-w-[1600px] w-full">
-          {band[0].fields.folders.length &&
+          {band[0].fields.folders &&
             band[0].fields.folders.map((folder, i) => {
               return (
                 <a
