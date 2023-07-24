@@ -47,6 +47,89 @@ export default function Home({ teamMembers, bands, onePassword }) {
       <main
         className={`flex h-full flex-col items-center justify-between p-12 ${inter.className} relative`}
       >
+        {/* <div className="discord-widget">
+          {!isModalOpen && (
+            <button className="open-button" onClick={handleOpenModal}>
+              Open Discord
+            </button>
+          )}
+
+          {isModalOpen && (
+            <div className="modal">
+              <button className="close-button" onClick={handleCloseModal}>
+                Close Discord
+              </button>
+              <WidgetBot
+                style={{ height: "80vh", width: "80vw" }}
+                server={process.env.NEXT_PUBLIC_BIG_SERVER}
+                channel={process.env.NEXT_PUBLIC_BIG_CHANNEL}
+              />
+            </div>
+          )}
+
+          <style jsx>{`
+            .discord-widget {
+              position: fixed;
+              bottom: 20px;
+              right: 120px;
+              z-index: 1000;
+            }
+
+            .open-button {
+              padding: 10px 20px;
+              background-color: #7289da;
+              color: #fff;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 16px;
+            }
+
+            .modal {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background-color: rgba(0, 0, 0, 0.8);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              z-index: 9999;
+            }
+
+            .close-button {
+              position: absolute;
+              top: 20px;
+              right: 20px;
+              padding: 5px;
+              background-color: transparent;
+              color: #fff;
+              border: none;
+              font-size: 16px;
+              cursor: pointer;
+              padding: 10px 20px;
+              background-color: #7289da;
+              color: #fff;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              margin-bottom: 16px;
+            }
+
+            @media screen and (max-width: 768px) {
+              .discord-widget {
+                bottom: 10px;
+                right: 10px;
+              }
+
+              .close-button {
+                top: 10px;
+                right: 10px;
+              }
+            }
+          `}</style>
+        </div> */}
         <div className="discord-widget">
           {!isModalOpen && (
             <button className="open-button" onClick={handleOpenModal}>
@@ -61,8 +144,8 @@ export default function Home({ teamMembers, bands, onePassword }) {
               </button>
               <WidgetBot
                 style={{ height: "80vh", width: "80vw" }}
-                server={process.env.NEXT_PUBLIC_SERVER}
-                channel={process.env.NEXT_PUBLIC_CHANNEL}
+                server={process.env.NEXT_PUBLIC_BIG_SERVER}
+                channel={process.env.NEXT_PUBLIC_BIG_CHANNEL}
               />
             </div>
           )}

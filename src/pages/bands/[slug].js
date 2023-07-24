@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import LoginForm from "@/components/LoginForm";
+import { FaInstagram, FaTwitter, FaYoutube, FaTiktok } from "react-icons/fa";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -79,8 +80,52 @@ export default function Band({ band, onePassword }) {
               1Password
             </a>
           </div>
-          <div className="font-mono uppercase text-2xl">
+          <div className="font-mono uppercase text-2xl flex items-center">
             {band[0].fields.title}
+            {band[0].fields.instagram && (
+              <span className="ml-4">
+                <a
+                  href={band[0].fields.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram />
+                </a>
+              </span>
+            )}
+            {band[0].fields.twitter && (
+              <span className="ml-4">
+                <a
+                  href={band[0].fields.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTwitter />
+                </a>
+              </span>
+            )}
+            {band[0].fields.tikTok && (
+              <span className="ml-4">
+                <a
+                  href={band[0].fields.tikTok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaTiktok />
+                </a>
+              </span>
+            )}
+            {band[0].fields.youTube && (
+              <span className="ml-4">
+                <a
+                  href={band[0].fields.youTube}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaYoutube />
+                </a>
+              </span>
+            )}
           </div>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8 xl:gap-16 max-w-[1600px] w-full">
