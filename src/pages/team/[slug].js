@@ -38,7 +38,7 @@ export default function TeamMember({ teamMember, onePassword }) {
         <main
           className={`flex  flex-col items-center justify-between p-12 ${inter.className}`}
         >
-          <div className="w-full max-w-[1600px] mb-16 flex justify-between items-center">
+          <div className="w-full max-w-[1600px] mb-12 flex justify-between items-center">
             <Link href="/">
               <Image
                 src="/fa.jpg"
@@ -58,7 +58,7 @@ export default function TeamMember({ teamMember, onePassword }) {
       <main
         className={`flex  flex-col items-center justify-between p-12 ${inter.className}`}
       >
-        <div className="w-full max-w-[1600px] mb-16 flex justify-between items-center">
+        <div className="w-full max-w-[1600px] mb-12 flex justify-between items-center">
           <div className="flex items-center md:flex-row flex-col">
             <Link href="/">
               <Image

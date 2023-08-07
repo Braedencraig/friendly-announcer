@@ -5,12 +5,14 @@ import WidgetBot from "@widgetbot/react-embed";
 import { Inter } from "next/font/google";
 import { createClient } from "contentful";
 import LoginForm from "@/components/LoginForm";
+import SearchBar from "@/components/SearchBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ teamMembers, bands, onePassword }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [query, setQuery] = useState("");
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -215,7 +217,7 @@ export default function Home({ teamMembers, bands, onePassword }) {
         </div>
         {!isModalOpen && (
           <>
-            <div className="w-full max-w-[1600px] mb-16 flex lg:flex-row flex-col justify-between items-center">
+            <div className="w-full max-w-[1600px] mb-12 flex lg:flex-row flex-col justify-between items-center">
               <div className="flex items-center md:flex-row flex-col">
                 <Link href="/">
                   <Image
@@ -236,7 +238,7 @@ export default function Home({ teamMembers, bands, onePassword }) {
                   1Password
                 </a>
               </div>
-              <div className="font-mono w-full flex justify-start sm:justify-end gap-8 flex-wrap max-w-[900px] lg:mt-0 mt-12">
+              <div className="font-mono w-full flex justify-start lg:justify-end gap-8 flex-wrap max-w-[900px] lg:mt-0 mt-12">
                 {teamMembers[0].fields.teamMember.map(
                   ({ fields: { title, slug } }, i) => {
                     return (
@@ -250,6 +252,11 @@ export default function Home({ teamMembers, bands, onePassword }) {
                 )}
               </div>
             </div>
+            <SearchBar
+              setQuery={setQuery}
+              query={query}
+              data={bands[0].fields.band}
+            />
             <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8 xl:gap-16 max-w-[1600px] w-full">
               {bands[0].fields.band.map(
                 ({ fields: { title, slug, folders, image } }, i) => {
