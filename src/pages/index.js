@@ -146,8 +146,8 @@ export default function Home({ teamMembers, bands, onePassword }) {
               </button>
               <WidgetBot
                 style={{ height: "80vh", width: "80vw" }}
-                server={process.env.NEXT_PUBLIC_BIG_SERVER}
-                channel={process.env.NEXT_PUBLIC_BIG_CHANNEL}
+                server={process.env.NEXT_PUBLIC_SERVER}
+                channel={process.env.NEXT_PUBLIC_CHANNEL}
               />
             </div>
           )}

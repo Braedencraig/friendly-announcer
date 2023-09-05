@@ -10,6 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export default function Band({ band, onePassword }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  const [active, setActive] = useState("");
 
   useEffect(() => {
     const authenticated = localStorage.getItem("token");
@@ -131,21 +132,72 @@ export default function Band({ band, onePassword }) {
         <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 lg:gap-8 xl:gap-16 max-w-[1600px] w-full">
           {band[0].fields.folders &&
             band[0].fields.folders.map((folder, i) => {
+              const emoji = folder.fields.titleWithEmoji?.content.map(
+                (item, i) => {
+                  return item.content[0].value;
+                }
+              );
               return (
-                <a
+                <div
                   key={i}
-                  href={folder.fields.url}
-                  className="lg:mb-0 mb-8 group rounded-lg border border-gray-300 bg-black dark:border-neutral-700 dark:bg-neutral-800/30 px-5 py-4 transition-all hover:scale-105"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  onClick={() => setActive(i)}
+                  className={`lg:mb-0 mb-8 group rounded-lg border cursor-pointer ${
+                    active === i ? "border-black" : "border-gray-300"
+                  }  bg-black px-5 py-4 transition-all hover:scale-105`}
                 >
                   <h2 className={`mb-3 text-2xl font-semibold font-mono`}>
+                    {emoji !== undefined && `${emoji[0]} ${" "}`}
                     {folder.fields.title}
                   </h2>
-                </a>
+                </div>
               );
             })}
         </div>
+        {band[0].fields.folders &&
+          band[0].fields.folders.map((folder, i) => {
+            if (active === i) {
+              if (folder.fields.folderContents === undefined) {
+                return (
+                  <div
+                    key={i}
+                    className="text-center mt-32 max-w-[1600px] w-full"
+                  >
+                    <div className="lg:mb-0 mb-8 px-5 py-4 ">
+                      <h2
+                        className={`mb-3 text-2xl font-semibold font-mono transition-all hover:scale-105`}
+                      >
+                        No content yet
+                      </h2>
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div
+                  key={i}
+                  className="text-center mt-32 max-w-[1600px] w-full"
+                >
+                  {folder.fields.folderContents?.map((item, i) => {
+                    return (
+                      <a
+                        key={i}
+                        href={item.fields.url}
+                        className="lg:mb-0 mb-8 px-5 py-4 "
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <h2
+                          className={`mb-3 text-2xl font-semibold font-mono transition-all hover:scale-105`}
+                        >
+                          {item.fields.title}
+                        </h2>
+                      </a>
+                    );
+                  })}
+                </div>
+              );
+            }
+          })}
       </main>
     );
   }
