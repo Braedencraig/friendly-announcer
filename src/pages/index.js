@@ -231,7 +231,7 @@ export default function Home({ teamMembers, bands, onePassword }) {
                 </Link>
                 <a
                   className="md:ml-8 mt-8 md:mt-0 font-mono"
-                  href={onePassword[0].fields.url}
+                  href={onePassword[0]?.fields.url}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
