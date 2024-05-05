@@ -178,10 +178,25 @@ export default function Band({ band, onePassword }) {
                   className="text-center mt-32 max-w-[1600px] w-full"
                 >
                   {folder.fields.folderContents?.map((item, i) => {
+                    if (
+                      item?.fields?.url === undefined &&
+                      item?.fields?.title === undefined
+                    ) {
+                      return (
+                        <div key={i} className="lg:mb-0 mb-8 px-5 py-4 ">
+                          <h2
+                            className={`mb-3 text-2xl font-semibold font-mono transition-all hover:scale-105`}
+                          >
+                            No content yet
+                          </h2>
+                        </div>
+                      );
+                    }
+
                     return (
                       <a
                         key={i}
-                        href={item.fields.url}
+                        href={item?.fields?.url}
                         className="lg:mb-0 mb-8 px-5 py-4 "
                         target="_blank"
                         rel="noopener noreferrer"
@@ -189,7 +204,7 @@ export default function Band({ band, onePassword }) {
                         <h2
                           className={`mb-3 text-2xl font-semibold font-mono transition-all hover:scale-105`}
                         >
-                          {item.fields.title}
+                          {item?.fields?.title}
                         </h2>
                       </a>
                     );
@@ -209,8 +224,20 @@ export async function getStaticProps({ params, preview = false }) {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
-  const data = await client.getEntries();
-  const band = data.items.filter(
+  let data = [];
+  let skip = 0;
+  const limit = 100; // Max items per page set by Contentful API
+
+  while (true) {
+    const response = await client.getEntries({ skip, limit });
+    data = data.concat(response.items);
+    if (data.length >= response.total) {
+      break;
+    }
+    skip += limit; // Increase skip by limit to fetch the next set of items
+  }
+
+  const band = data.filter(
     (item) =>
       item.sys.contentType.sys.id === "band" && item.fields.slug === params.slug
   );
@@ -218,7 +245,7 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       band,
-      onePassword: data.items.filter(
+      onePassword: data.filter(
         (item) => item.sys.contentType.sys.id === "onePassword"
       ),
     },

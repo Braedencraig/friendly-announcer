@@ -119,8 +119,20 @@ export async function getStaticProps({ params, preview = false }) {
     accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
   });
 
-  const data = await client.getEntries();
-  const teamMember = data.items.filter(
+  let data = [];
+  let skip = 0;
+  const limit = 100; // Max items per page set by Contentful API
+
+  while (true) {
+    const response = await client.getEntries({ skip, limit });
+    data = data.concat(response.items);
+    if (data.length >= response.total) {
+      break;
+    }
+    skip += limit; // Increase skip by limit to fetch the next set of items
+  }
+
+  const teamMember = data.filter(
     (item) =>
       item.sys.contentType.sys.id === "teamMember" &&
       item.fields.slug === params.slug
@@ -128,7 +140,7 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       teamMember,
-      onePassword: data.items.filter(
+      onePassword: data.filter(
         (item) => item.sys.contentType.sys.id === "onePassword"
       ),
     },
